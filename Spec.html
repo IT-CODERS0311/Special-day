@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Special Day 💛</title>
+<style>
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(145deg, #e3b8ff, #ffcee7, #ffd6f6);
+    overflow-x: hidden;
+    text-align: center;
+}
+
+/* Headings Purple */
+.main-heading {
+    font-size: 35px;
+    margin-top: 25px;
+    font-weight: 600;
+    color: #9b59b6; /* purple */
+    text-shadow: 0 0 5px #9b59b6, 0 0 10px #b180d7;
+}
+
+/* Underline */
+.underline {
+    width: 220px;
+    height: 3px;
+    margin: 8px auto 25px auto;
+    background: #fff;
+    border-radius: 20px;
+    opacity: 0.7;
+}
+
+/* Section visibility */
+.section { display: none; padding: 40px; min-height: 100vh; }
+.active { display: block; }
+
+/* Floating Hearts */
+.heart {
+    position: fixed;
+    bottom: -10px;
+    background: #ff8dc7;
+    width: 15px;
+    height: 15px;
+    transform: rotate(45deg);
+    animation: floatUp 6s linear infinite;
+    opacity: 0.7;
+}
+.heart:before, .heart:after {
+    content: "";
+    position: absolute;
+    background: #ff8dc7;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+}
+.heart:before { top: -8px; left: 0; }
+.heart:after { left: 8px; top: 0; }
+@keyframes floatUp {
+    0% { transform: translateY(0) rotate(45deg); opacity: 0.8; }
+    100% { transform: translateY(-120vh) rotate(45deg); opacity: 0; }
+}
+
+/* Buttons */
+button {
+    background: #ffffffaa;
+    padding: 12px 28px;
+    border: none;
+    border-radius: 28px;
+    cursor: pointer;
+    font-size: 18px;
+    margin-top: 20px;
+    color: #444;
+    backdrop-filter: blur(6px);
+    box-shadow: 0 0 10px #fff5;
+    transition: 0.3s;
+}
+button:hover {
+    background: #fff;
+    transform: scale(1.05);
+}
+
+/* Gift Boxes */
+.gift-box {
+    width: 120px;
+    height: 120px;
+    background: linear-gradient(145deg, #ff7eb9, #ffb8de);
+    border-radius: 20px;
+    display: inline-block;
+    margin: 20px;
+    cursor: pointer;
+    position: relative;
+    box-shadow: 0 0 20px #ff8dd8;
+    animation: popIn 1s ease;
+    transition: 0.3s;
+}
+.gift-box:hover {
+    transform: scale(1.1) rotate(3deg);
+    box-shadow: 0 0 25px #ff5acb;
+}
+@keyframes popIn { 0% { transform: scale(0); } 100% { transform: scale(1); } }
+.gift-box:after {
+    content: "🎁";
+    position: absolute;
+    font-size: 60px;
+    top: 28px;
+    left: 28px;
+}
+
+/* Typing Letter with Glow */
+.typing {
+    font-size: 22px;
+    width: 85%;
+    margin: auto;
+    white-space: pre-line;
+    border-right: 3px solid #fff;
+    color: #fff;
+    text-shadow: 0 0 10px #ffdb5c, 0 0 20px #ffe88c;
+    animation: blink 0.7s infinite;
+}
+@keyframes blink { 50% { border-color: transparent; } }
+
+/* Gift Message Glow */
+.gift-msg {
+    font-size: 23px;
+    margin-top: 25px;
+    color: #fff;
+    text-shadow: 0 0 10px #ffdb5c, 0 0 20px #ffe88c;
+}
+
+/* Balloons */
+.balloon {
+    width: 90px;
+    height: 110px;
+    border-radius: 50%;
+    position: absolute;
+    cursor: pointer;
+    animation: float 3s infinite ease-in-out;
+    box-shadow: 0 0 15px #fff;
+}
+@keyframes float { 0% { transform: translateY(0); } 50% { transform: translateY(-35px); } 100% { transform: translateY(0); } }
+
+/* Confetti */
+@keyframes confettiFall {
+    0% { transform: translateY(0) rotate(0); opacity: 1; }
+    100% { transform: translateY(150px) rotate(360deg); opacity: 0; }
+}
+
+/* Thank You Glow */
+.glow-text {
+    color: #fff;
+    font-size: 22px;
+    text-shadow: 0 0 10px #ffdb5c, 0 0 20px #ffe88c;
+}
+</style>
+</head>
+<body>
+
+<!-- PAGE 1 -->
+<div id="page1" class="section active">
+    <h1 class="main-heading">✨ To Make Your Day Even More Special ✨</h1>
+    <div class="underline"></div>
+    <h2 style="color:white; margin-bottom:15px;">Choose a Gift 🎁</h2>
+    <div class="gift-box" onclick="giftMessage()"></div>
+    <div class="gift-box" onclick="giftMessage()"></div>
+    <div class="gift-box" onclick="giftMessage()"></div>
+    <p id="giftMsg" class="gift-msg"></p>
+    <button onclick="nextPage(2)">Next ➜</button>
+    <h3>MADE BY ISHITA</h3>
+</div>
+
+<!-- PAGE 2 -->
+<div id="page2" class="section">
+    <h1 class="main-heading">💌 A Letter For You</h1>
+    <div class="underline"></div>
+    <p id="typingText" class="typing"></p>
+    <button onclick="typeLetter()">Start Reading</button>
+    <button onclick="nextPage(3)">Next ➜</button>
+    <H3>Made by ISHITA</H3>
+</div>
+
+<!-- PAGE 3 -->
+<div id="page3" class="section">
+    <h1 class="main-heading">🎈 Pop a Balloon</h1>
+    <div class="underline"></div>
+    <div id="balloonArea" style="position:relative; height:60vh;"></div>
+    <p id="balloonMsg" class="gift-msg"></p>
+    <button onclick="nextPage(4)">Next ➜</button>
+    <H3>Made by Ishita</H3>
+</div>
+
+<!-- PAGE 4 -->
+<div id="page4" class="section">
+    <h1 class="main-heading">💛 Thank You 💛</h1>
+    <div class="underline"></div>
+    <p class="glow-text">You made this moment beautiful just by being here.</p>
+    <p class="glow-text" style="opacity:0.9;">Sending you love, softness, and all the happy vibes today. 💗</p>
+</div>
+
+<script>
+/* PAGE SWITCH */
+function nextPage(num) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.getElementById("page" + num).classList.add('active');
+}
+
+/* Floating Hearts */
+setInterval(() => {
+    let h = document.createElement("div");
+    h.className = "heart";
+    h.style.left = Math.random()*100 + "%";
+    h.style.animationDuration = (4 + Math.random()*3) + "s";
+    document.body.appendChild(h);
+    setTimeout(() => h.remove(), 7000);
+}, 350);
+
+/* PAGE 1 – Gift Messages */
+const giftMsgs = [
+    "You make the world softer 💗",
+    "Life feels gentler because of you ✨",
+    "You deserve every bit of happiness 💕",
+    "I hope something beautiful happens to you today 💜"
+];
+function giftMessage() {
+    document.getElementById("giftMsg").innerText =
+        giftMsgs[Math.floor(Math.random()*giftMsgs.length)];
+}
+
+/* PAGE 2 – Typing Letter */
+let letter = 
+`Some people walk into your life quietly,
+And still make everything feel lighter.
+
+You are one of those rare souls.
+
+Thank you for being softness in a loud world.
+Thank you for existing.
+-Ishita`;
+let index = 0;
+function typeLetter() {
+    index = 0;
+    const textEl = document.getElementById("typingText");
+    textEl.innerText = "";
+    let interval = setInterval(() => {
+        textEl.innerText = letter.slice(0, index);
+        index++;
+        if(index > letter.length) clearInterval(interval);
+    }, 45);
+}
+
+/* PAGE 3 – Balloons + Confetti */
+const balloonMsgs = [
+    "You are loved 💗",
+    "You’re precious ✨",
+    "Keep shining 💛",
+    "You deserve happiness 💕",
+    "You're amazing 🌟"
+];
+function createBalloons() {
+    const area = document.getElementById("balloonArea");
+    area.innerHTML = "";
+    for (let i = 0; i < 5; i++) {
+        let b = document.createElement("div");
+        b.className = "balloon";
+        b.style.left = Math.random()*80 + "%";
+        b.style.background = `hsl(${Math.random()*360}, 80%, 75%)`;
+        b.onclick = () => {
+            showConfetti(b);
+            document.getElementById("balloonMsg").innerText =
+                balloonMsgs[Math.floor(Math.random()*balloonMsgs.length)];
+            b.remove();
+        };
+        area.appendChild(b);
+    }
+}
+function showConfetti(balloon) {
+    for (let i = 0; i < 25; i++) {
+        let c = document.createElement("div");
+        c.style.width = "8px";
+        c.style.height = "8px";
+        c.style.background = `hsl(${Math.random()*360},90%,60%)`;
+        c.style.position = "absolute";
+        c.style.left = balloon.offsetLeft + "px";
+        c.style.top = balloon.offsetTop + "px";
+        c.style.animation = "confettiFall 1.1s linear";
+        c.style.borderRadius = "2px";
+        document.getElementById("balloonArea").appendChild(c);
+        setTimeout(()=>c.remove(),1100);
+    }
+}
+createBalloons();
+</script>
+
+</body>
+</html>
